@@ -1,17 +1,37 @@
-# Overriding product variant of sylius
-sylius_product:
-    resources:
-        product_variant:
-            classes:
-                model: Brille24\SyliusTierPricePlugin\Entity\ProductVariant
+imports:
+    - { resource: "indexes/bitbag_shop_products.yml" }
+    - { resource: "indexes/bitbag_option_taxons.yml" }
+    - { resource: "indexes/bitbag_attribute_taxons.yml" }
+    - { resource: "indexes/bitbag_shop_facets.yml" }
 
-# New resources
-sylius_resource:
-  resources:
-    brille24.tierprice:
-      classes:
-        model: Brille24\SyliusTierPricePlugin\Entity\TierPrice
-        form: Brille24\SyliusTierPricePlugin\Form\TierPriceType
-        repository: Brille24\SyliusTierPricePlugin\Repository\TierPriceRepository
-#        factory: Brille24\SyliusTierPricePlugin\Factory\TierPriceFactory
+parameters:
+    env(BITBAG_ES_INDEX_PREFIX): ""
+    env(BITBAG_ES_HOST): "localhost"
+    env(BITBAG_ES_PORT): "9200"
+    bitbag_es_index_prefix: "%env(BITBAG_ES_INDEX_PREFIX)%"
+    bitbag_es_host: "%env(BITBAG_ES_HOST)%"
+    bitbag_es_port: "%env(BITBAG_ES_PORT)%"
 
+    bitbag_es_pagination_available_page_limits: [9, 18, 36]
+    bitbag_es_pagination_default_limit: 9
+    bitbag_es_fuzziness: AUTO
+    bitbag_es_facets_auto_discover: true
+    bitbag_es_excluded_facet_attributes: []
+    bitbag_es_excluded_facet_options: []
+
+fos_elastica:
+    clients:
+        default:
+            host: "%bitbag_es_host%"
+            port: "%bitbag_es_port%"
+
+twig:
+    globals:
+        bitbag_es_pagination_available_page_limits: "%bitbag_es_pagination_available_page_limits%"
+#
+#sylius_ui:
+#    events:
+#        sylius.shop.layout.header.content:
+#            blocks:
+#                bitbag_es_search_form:
+#                    template: "@BitBagSyliusElasticsearchPlugin/Shop/Menu/_searchForm.html.twig"

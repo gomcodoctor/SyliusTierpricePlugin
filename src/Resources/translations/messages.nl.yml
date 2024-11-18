@@ -1,3 +1,26 @@
-brille24_tier_price:
+bitbag_sylius_elasticsearch_plugin:
     ui:
-        tier_prices: Staffelprijzen
+        min_price: Minimale prijs
+        max_price: Maximale prijs
+        filter_results: Filter resultaten
+        filter: Filter
+        sort: Sorteer op
+        bestsellers: Bestsellers
+        newest: Nieuwste
+        oldest: Oudste
+        most_expensive: Duurste
+        cheapest: Goedkoopste
+        per_page: Per pagina
+        search_header: Zoeken
+
+        search_box:
+            query:
+                placeholder: Zoeken naar producten...
+            search_button:
+                label: Zoeken
+
+        facet:
+            price:
+                label: Prijs
+            taxon:
+                label: Categorie
